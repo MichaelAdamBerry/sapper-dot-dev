@@ -17,10 +17,26 @@
     dataSection,
     webSection;
 
-  $: uiActive === true && code != undefined && blastOff();
-  $: dataActive === true && code != undefined && wedgesIn();
-  $: webDevActive === true && code != undefined && webIn();
-  $: cancelAnimations === true && code != undefined && cancelAll();
+  function isLoaded() {
+    return code != undefined;
+  }
+
+  $: uiActive === true && isLoaded()
+    ? blastOff()
+    : isLoaded() && uiActive === false
+    ? cancelBlastOff()
+    : undefined;
+  $: dataActive === true && isLoaded()
+    ? wedgesIn()
+    : isLoaded() && dataActive === false
+    ? cancelData()
+    : undefined;
+  $: webDevActive === true && isLoaded()
+    ? webIn()
+    : isLoaded() && webDevActive === false
+    ? cancelWebIn()
+    : undefined;
+  $: cancelAnimations === true && isLoaded() && cancelAll();
 
   //TODO DataViz Animations
 
@@ -28,6 +44,12 @@
     cancelData();
     cancelBlastOff();
     cancelWebIn();
+  }
+
+  function clearCode() {
+    if (isLoaded() === true) {
+      code.style = "opacity: 0;";
+    }
   }
 
   function wedgesIn() {
@@ -39,7 +61,6 @@
   }
 
   function cancelData() {
-    code.style = "opacity: 1";
     dataSection.style = "opacity: 0";
     wedge1.style = "transform : translate(0,0)";
     wedge2.style = "transform: translate(0, 0)";
@@ -47,24 +68,22 @@
   }
 
   function webIn() {
-    code.style = "opacity: 0";
     webSection.style = "opacity: 1";
   }
 
   function cancelWebIn() {
-    code.style = "opacity: 1";
     webSection.style = "opacity: 0";
   }
 
   function blastOff() {
-    code.style = "opacity: 0";
+    clearCode();
     rocket.style = "transform: translate(-500px , -300px) rotate(-28deg";
     createStars();
     planet.style = "opacity: 1";
   }
 
   function cancelBlastOff() {
-    code.style = "opacity: 1";
+    code.style = "display: block; opacity: 1;";
     rocket.style = "transform: translate(0px , 0px) rotate(0deg";
     removeStars();
     planet.style = "opacity: 0";
@@ -83,7 +102,7 @@
       c.setAttribute("cx", Math.random() * 616 - 38);
       c.setAttribute("cy", Math.random() * 600 - 17);
       c.setAttribute("r", 5);
-      c.setAttribute("fill", "#fff");
+      c.setAttribute("fill", "#f2f2f2");
       g.appendChild(c);
 
       let startTime = 0;
@@ -422,7 +441,7 @@
     </g>
   </g>
 
-  <g class="code" bind:this={code} in:fade>
+  <g class="code" bind:this={code}>
     <path
       class="e"
       d="M330.3,202.3H187.6a1.8,1.8,0,0,1,0-3.6H330.3a1.8,1.8,0,1,1,0,3.6Z" />

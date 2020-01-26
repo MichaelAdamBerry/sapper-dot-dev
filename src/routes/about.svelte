@@ -6,8 +6,18 @@
     width: 400px;
   }
 
+  .container {
+    overflow: hidden;
+  }
+
   figure img {
     border-radius: 8px;
+  }
+
+  @media (max-width: 600px) {
+    figure img {
+      max-width: 300px;
+    }
   }
 
   @media (max-width: 1020px) {
@@ -52,7 +62,7 @@
     worked previously as an actor, carpenter, and project manager for live
     events. As an actor I appeared in films and plays in New York and regionally
     across the US. You can check out my
-    <a href="https://www.imdb.com/find?s=all&q=adam+barrie">IMDB page</a>
+    <a href="https://www.imdb.com/name/nm2291542/?ref_=fn_al_nm_1">IMDB page</a>
     if you want to see some of the films I appeared in which many critics hailed
     as "just fine".
   </p>

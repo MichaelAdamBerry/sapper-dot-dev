@@ -1,9 +1,67 @@
 <script>
+  import { onMount, onDestroy } from "svelte";
   import LandingSVG from "../components/LandingSVG.svelte";
-  let webDevActive = false;
-  let dataActive = false;
-  let uiActive = false;
-  let cancelAnimations = false;
+
+  //TODO active animation should automatically loop though the three categories
+  // When a word is hovered over it should cancel this loop or restart this loop
+  $: webDevActive = false;
+  $: dataActive = false;
+  $: uiActive = false;
+  $: cancelAnimations = false;
+  //starting animation to fire.
+  let next = "uiActive";
+  let intervalId;
+  let startInterval;
+  let clearInterval;
+
+  function clearAll() {
+    cancelAnimations = true;
+    dataActive = false;
+    uiActive = false;
+    webDevActive = false;
+  }
+
+  function updateAnimation(activeAnimation) {
+    switch (activeAnimation) {
+      case "dataActive":
+        dataActive = true;
+        next = "webDevActive";
+        break;
+      case "uiActive":
+        uiActive = true;
+
+        next = "dataActive";
+        break;
+      case "webDevActive":
+        webDevActive = true;
+        next = "uiActive";
+        break;
+      default:
+        console.warn("switch did not return a true case");
+    }
+  }
+
+  //Isolate window to run in client only by putting code in onMount and onDestroy methods
+
+  onMount(() => {
+    //startInterval creates a new interval instance
+    //and assigns it's id to equal interval id
+    //and defines our clearInterval function
+    // startInterval will be called when user resets or stops the animation
+    startInterval = () => {
+      intervalId = window.setInterval(() => {
+        clearAll();
+        updateAnimation(next);
+        cancelAnimations = false;
+      }, 2500);
+      clearInterval = () => window.clearInterval(intervalId);
+    };
+    startInterval();
+  });
+
+  onDestroy(() => {
+    window.clearInterval(intervalId);
+  });
 </script>
 
 <style>
@@ -77,39 +135,46 @@
       <span
         style={webDevActive && 'background-color: var(--yl)'}
         on:mouseenter={() => {
+          clearInterval();
           cancelAnimations = false;
           webDevActive = true;
         }}
         on:mouseleave={() => {
+          startInterval();
           webDevActive = false;
           cancelAnimations = true;
         }}>
         Web Development
       </span>
-
+      •
       <span
         style={dataActive && 'background-color: var(--yl)'}
         on:mouseenter={() => {
+          clearInterval();
           cancelAnimations = false;
           dataActive = true;
         }}
         on:mouseleave={() => {
+          startInterval();
           dataActive = false;
           cancelAnimations = true;
         }}>
-        • Data Visualization
+        Data Visualization
       </span>
+      •
       <span
         style={uiActive && 'background-color: var(--yl)'}
         on:mouseenter={() => {
+          clearInterval();
           cancelAnimations = false;
           uiActive = true;
         }}
         on:mouseleave={() => {
+          startInterval();
           uiActive = false;
           cancelAnimations = true;
         }}>
-        • Interactive UIs
+        Interactive UIs
       </span>
     </p>
   </div>
