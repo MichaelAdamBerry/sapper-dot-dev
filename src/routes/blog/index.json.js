@@ -12,7 +12,6 @@ const contents = JSON.stringify(
 );
 
 export function get(req, res) {
-  console.log(contents);
   res.writeHead(200, {
     "Content-Type": "application/json"
   });

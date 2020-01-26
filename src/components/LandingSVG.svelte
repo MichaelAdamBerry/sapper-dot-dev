@@ -687,7 +687,6 @@
   <g
     class="rocket"
     on:click={() => {
-      console.log('rocket-clicked');
       blastOff();
     }}
     bind:this={rocket}>
