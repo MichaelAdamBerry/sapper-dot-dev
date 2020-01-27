@@ -54,6 +54,7 @@
 
   .clipped {
     background-color: var(--dk-blu);
+    -webkit-clip-path: url(#swoop);
     clip-path: url(#swoop);
     width: 100%;
     height: 100%;
