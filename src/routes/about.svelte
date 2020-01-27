@@ -1,11 +1,4 @@
 <style>
-  figure {
-    float: right;
-    /* margin: -3em -7em 2em 2em; */
-    max-width: 300px;
-    width: 300px;
-  }
-
   .svg-container {
     float: right;
     max-width: 300px;
@@ -19,23 +12,6 @@
 
   .container {
     overflow: hidden;
-  }
-
-  figure img {
-    border-radius: 8px;
-  }
-
-  @media (max-width: 600px) {
-    figure img {
-      max-width: 300px;
-    }
-  }
-
-  @media (max-width: 1020px) {
-    figure {
-      float: none;
-      margin: 0 auto 2em;
-    }
   }
 </style>
 
