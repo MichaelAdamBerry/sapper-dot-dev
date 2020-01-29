@@ -24,6 +24,7 @@
     font-weight: 700;
     margin-bottom: 0;
     font-size: 7em;
+    cursor: none;
   }
 
   p {
@@ -73,9 +74,10 @@
 <div class="home-container">
   <div class="home-copy">
     <h1>AdamBerry.dev</h1>
-    <p>
+    <p
+      style={webDevActive ? 'cursor: url(./tri-cursor.png), auto' : uiActive ? 'cursor: url(./sq-cursor.png), auto' : 'cursor: url(./circ-cursor.png), auto'}>
       <span
-        style={webDevActive && 'background-color: var(--yl)'}
+        style={webDevActive && 'background-color: var(--yl);'}
         on:mouseenter={() => {
           cancelAnimations = false;
           webDevActive = true;
