@@ -13,6 +13,16 @@
   .container {
     overflow: hidden;
   }
+
+  .resume-link {
+    display: none;
+  }
+
+  @media (min-width: 1000px) {
+    .resume-link {
+      display: block;
+    }
+  }
 </style>
 
 <svelte:head>
@@ -32,9 +42,9 @@
       on Unsplash
     </figcaption> 
   </figure> -->
-  <p>
+  <p class="resume-link">
     View my
-    <a href="adam_berry_pdf.pdf">resume (pdf)</a>
+    <a href="resume">resume (pdf)</a>
   </p>
   <div class="svg-container">
 
