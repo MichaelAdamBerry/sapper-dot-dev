@@ -7,7 +7,7 @@ Recently, I have been contributing to an open source, experimental data visualiz
 
 ## Pancake
 
-Pancake is an extension of the work Rich has done with [Sapper](https://sapper.svelte.dev/), a Svelte static site framework allowing developers the ability to create server rendered (aka super fast) web apps with ease. You can read all about the benefits of SSR here—essentially it allows us to serve sites which have already been compiled into html files by the framework. This fits perfectly with the Svelte model. Pancake was created as a tool to create server rendered (sans javascript ) data visualizations with Svelte. Traditionally, JavaScript and libraries like D3 are used to manipulate the DOM to "draw" our charts client side. Pancake provides a bundle of Svelte Components that wrap elements of charts. Once, compiled by Svelte/Sapper these components become responsive, server rendered charts that can ship without javascript. Check out this article where Rich explains how it works.
+Pancake is an extension of the work Rich has done with [Sapper](https://sapper.svelte.dev/), a Svelte static site framework allowing developers the ability to create server rendered (aka super fast) web apps with ease. You can read all about the benefits of SSR [here](https://css-tricks.com/server-side-react-rendering/)—essentially it allows node to serve "compiled" html files immediately, eliminating the lag time of the browser downloading the JavaScript.This fits perfectly with the Svelte model of "compiling away" to optimized vanilla JavaScript. Less code. Faster Apps. Pancake was created as a tool to create server rendered (sans javascript ) data visualizations with Svelte. Traditionally, JavaScript and libraries like D3 are used to manipulate the DOM to "draw" our charts client side. Pancake provides a bundle of Svelte Components that wrap elements of a chart to create dyanamic server rendered visualizations. Check out this article where Rich explains goes into more and showd some examples [of how it works.](https://dev.to/richharris/a-new-technique-for-making-responsive-javascript-free-charts-gmp)
 
 ## What are Slope Graphs?
 
@@ -19,11 +19,11 @@ A great way to think about slope graphs are to imagine you are looking at a supe
 
 In Tufte's work, he often assesses the quality of a chart based on a metric he refers to as "data ink" — the ratio of "drawing" needed to convey the appropriate meaning. Charts with higher "data ink" are usually confusing and a sign that a different models would communicate the data more clearly. The slope graph is an elegant in this respect. This might make one think that it would be a common chart to see in the wild. So why aren't slope graphs more common?
 
-Designing these visualizations can be tricky. Simply scaling labels hierarchically will cause some labels to overlap. Assuming code is used to build the chart programmatically, some care must be taken in dealing with these label collisions to optimize both legibility and accuracy. Below is the example I contributed the Pancake repo of examples. It is based on a this chart made by [Hamilton Ulmer](http://skedasis.com/d3/slopegraph/)
+Designing these visualizations can be tricky. Simply scaling labels hierarchically could cause some labels to bunch together and overlap. Assuming code is used to build the chart programmatically, some care must be taken in dealing with these label collisions to optimize both legibility and accuracy. Below is the example I contributed the Pancake repo of examples. It is based on a this chart made by [Hamilton Ulmer](http://skedasis.com/d3/slopegraph/)
 
 ## The Chart
 
-My solution was to roll my own label collision algorithm. It seemed like trying to customize existing functions, quickly became too complex and beyond the scope of the project. Here are the basic steps I took to deal with label collision:
+My solution was to roll my own label collision algorithm. At first I tried tweaking existing functions, but I then realized the amount of customization for purposes was beyond the scope of the project. Below are the basic steps I took to deal with label collision:
 
 1. Each side is searched for an overlap.
 2. If an overlap is found, check if there is space above and below to shift the items to create enough space.
