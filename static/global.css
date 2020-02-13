@@ -200,6 +200,10 @@ td {
   margin: 1em 0;
 }
 
+.content {
+  max-width: 75ch;
+}
+
 @media (max-width: 1020px) {
   h1 {
     font-size: 3em;
