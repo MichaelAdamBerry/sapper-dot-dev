@@ -1,6 +1,6 @@
 ---
 title: Limit 'Data Ink' with Slope Graphs
-date: 2019-02-13T12:51:00.000Z
+date: 2020-02-13T12:51:00.000Z
 ---
 
 Recently, I have been contributing to an open source, experimental data visualization project called [Pancake](https://pancake-charts.surge.sh/). Pancake was created by [Rich Harris](https://github.com/Rich-Harris/pancake), New York Times Graphic Editor and Creator of [Svelte](https://svelte.dev/). (If you haven't heard of Svelte, check out my initial [post](https://adamberrydotdev.now.sh/blog/post-four-svelte) on Svelte last fall). Below is a bit about the project, but if you came for the data viz and not so much the javascript, you can skip straight to Slope Graph section.
