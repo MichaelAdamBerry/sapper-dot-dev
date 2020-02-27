@@ -204,6 +204,10 @@ td {
   max-width: 75ch;
 }
 
+.content p {
+  background-color: var(--wht);
+}
+
 @media (max-width: 1020px) {
   h1 {
     font-size: 3em;
